@@ -28,6 +28,7 @@ class _ControlViewState extends State<ControlView> {
     return SmartScaffold(
       body: SizedBox.expand(
         child: PageView(
+          physics: const NeverScrollableScrollPhysics(),
           controller: _pageController,
           onPageChanged: (index) {
             setState(() => _selectedIndex = index);
@@ -41,7 +42,7 @@ class _ControlViewState extends State<ControlView> {
       bottomNavigationBar: BottomNavyBar(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         selectedIndex: _selectedIndex,
-        showElevation: true, // use this to remove appBar's elevation
+        showElevation: true,
         onItemSelected: (index) => setState(() {
           _selectedIndex = index;
           _pageController.animateToPage(index,
@@ -55,7 +56,7 @@ class _ControlViewState extends State<ControlView> {
               color: AppColors.primaryColor,
             ),
             title: const Text(
-              'Home',
+              'Scanner',
             ),
             activeColor: AppColors.primaryColor,
           ),

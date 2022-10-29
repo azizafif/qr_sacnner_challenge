@@ -20,6 +20,10 @@ dependencies:
   sqflite: ^2.2.0+2 # Local database
   path:
   bottom_navy_bar: ^6.0.0 # Navigation bottom bar
+  qr_code_scanner: ^1.0.0
+  responsive_framework: ^0.2.0
+  intl: ^0.17.0
+
 
 
 

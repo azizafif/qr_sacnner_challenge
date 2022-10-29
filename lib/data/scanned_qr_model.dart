@@ -1,7 +1,12 @@
 class ScannedQrCodeModel {
   int? id;
   String? qrContent;
-  DateTime? scannedAt;
+  int? scannedAt;
+  ScannedQrCodeModel({
+    this.id,
+    this.qrContent,
+    this.scannedAt,
+  });
 
   Map<String, dynamic> toJson() {
     return {

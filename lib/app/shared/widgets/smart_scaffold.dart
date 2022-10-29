@@ -87,7 +87,7 @@ class _DisconnectedWidget extends StatelessWidget {
                                 .textTheme
                                 .titleMedium
                                 ?.copyWith(
-                                    color: AppColors.warningColor,
+                                    color: AppColors.primaryColor,
                                     letterSpacing: 2,
                                     height: 1,
                                     shadows: [
