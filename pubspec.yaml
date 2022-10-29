@@ -18,6 +18,7 @@ dependencies:
   get:  # State management
   connectivity_plus: ^2.3.7 # handler internet connection
   sqflite: ^2.2.0+2 # Local database
+  path:
 
 
 dev_dependencies:
