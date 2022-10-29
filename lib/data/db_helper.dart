@@ -20,7 +20,7 @@ class DBHelper {
           CREATE TABLE $_tableName (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             qrContent STRING,
-            scannedAt INTEGER,
+            scannedAt INTEGER
            )
           
           ''');

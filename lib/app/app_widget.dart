@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:qr_scanner_challenge/feature/control_view_module.dart';
 
 import 'design/index.dart';
 import 'shared/handlers/connectivity_handler.dart';
@@ -27,11 +28,9 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
-  Widget build(BuildContext context) => const GetMaterialApp(
+  Widget build(BuildContext context) => GetMaterialApp(
         //$ Theme management
-        // theme: AppThemes.lightTheme,
-        // darkTheme: AppThemes.darkTheme,
-        // themeMode: AppThemes.themeMode,
+        theme: AppThemes.lightTheme,
 
         //& Locales management
         // supportedLocales: S.delegate.supportedLocales,
@@ -45,14 +44,8 @@ class _MyAppState extends State<MyApp> {
         // ],
 
         //@ Routing
-        // initialRoute: signInModule.name,
-        // getPages: [
-        //   signInModule,
-        //   signUpModule,
-        //   profileModule,
-        //   speciesModule,
-        //   stylesModule,
-        // ],
+        initialRoute: controlModule.name,
+        getPages: [controlModule],
         defaultTransition: Transition.cupertino,
       );
 }

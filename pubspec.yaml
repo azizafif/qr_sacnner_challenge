@@ -19,6 +19,8 @@ dependencies:
   connectivity_plus: ^2.3.7 # handler internet connection
   sqflite: ^2.2.0+2 # Local database
   path:
+  bottom_navy_bar: ^6.0.0 # Navigation bottom bar
+
 
 
 dev_dependencies:

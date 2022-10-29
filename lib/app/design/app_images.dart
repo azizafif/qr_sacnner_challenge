@@ -8,6 +8,8 @@ class _Image extends AssetImage {
 
 class AppImages {
   static const logo = _Image('logo.png');
+  static const scannerIcon = _Image('qr-code.png');
+  static const historyIcon = _Image('history.png');
 
   static Future precacheAssets(BuildContext context) async {
     await precacheImage(logo, context);
