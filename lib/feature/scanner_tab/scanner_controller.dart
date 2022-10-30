@@ -97,7 +97,7 @@ class ScannerController extends ServingController<ScannerServices> {
         buttonColor: AppColors.primaryColor,
         confirmTextColor: Colors.white,
         cancelTextColor: AppColors.primaryColor,
-        contentPadding: const EdgeInsets.all(11),
+        contentPadding: const EdgeInsets.all(21),
         textConfirm: "Open",
       );
     } else {
@@ -113,7 +113,7 @@ class ScannerController extends ServingController<ScannerServices> {
         buttonColor: AppColors.primaryColor,
         confirmTextColor: Colors.white,
         cancelTextColor: AppColors.primaryColor,
-        contentPadding: const EdgeInsets.all(11),
+        contentPadding: const EdgeInsets.all(21),
         textConfirm: "Save",
       );
     }
