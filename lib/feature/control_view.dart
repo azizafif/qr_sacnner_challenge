@@ -15,38 +15,22 @@ class ControlView extends StatefulWidget {
 
 class _ControlViewState extends State<ControlView> {
   int _selectedIndex = 0;
-  late PageController _pageController;
 
   @override
   void initState() {
     super.initState();
-    _pageController = PageController();
   }
 
   @override
   Widget build(BuildContext context) {
     return SmartScaffold(
-      body: SizedBox.expand(
-        child: PageView(
-          physics: const NeverScrollableScrollPhysics(),
-          controller: _pageController,
-          onPageChanged: (index) {
-            setState(() => _selectedIndex = index);
-          },
-          children: const <Widget>[
-            ScannerTab(),
-            HistoryTab(),
-          ],
-        ),
-      ),
+      body: _selectedIndex == 0 ? const ScannerTab() : const HistoryTab(),
       bottomNavigationBar: BottomNavyBar(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         selectedIndex: _selectedIndex,
         showElevation: true,
         onItemSelected: (index) => setState(() {
           _selectedIndex = index;
-          _pageController.animateToPage(index,
-              duration: const Duration(milliseconds: 300), curve: Curves.ease);
         }),
         items: [
           BottomNavyBarItem(

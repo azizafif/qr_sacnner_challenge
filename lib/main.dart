@@ -13,6 +13,6 @@ void main() async {
 
 void _setupStatusBarTransparency() =>
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
-        systemNavigationBarColor: Colors.white,
+        statusBarColor: Colors.transparent,
+        systemNavigationBarColor: Colors.transparent,
         statusBarBrightness: Brightness.light));

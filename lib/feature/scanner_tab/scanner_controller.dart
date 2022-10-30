@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:qr_scanner_challenge/app/design/index.dart';
 import 'package:qr_scanner_challenge/app/shared/controllers/serving_controller.dart';
 import 'package:qr_scanner_challenge/data/scanned_qr_model.dart';
 import 'package:qr_scanner_challenge/feature/scanner_tab/scanner_services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../app/shared/modules/exports.dart';
 
@@ -17,14 +20,27 @@ class ScannerController extends ServingController<ScannerServices> {
   Barcode? result;
   final RxList<ScannedQrCodeModel> scannedQrCodeModelList =
       <ScannedQrCodeModel>[].obs;
-  late DateTime _scannedAt;
+
   StreamSubscription<Barcode>? streamSubscription;
   Rx<bool> gotResult = false.obs;
 
   @override
   void onInit() {
-    _scannedAt = DateTime.now();
     super.onInit();
+  }
+
+  @override
+  void onReady() {
+    reassemble();
+    super.onReady();
+  }
+
+  void reassemble() {
+    if (Platform.isAndroid) {
+      qrController?.pauseCamera();
+    } else if (Platform.isIOS) {
+      qrController?.resumeCamera();
+    }
   }
 
   void onQRViewCreated(QRViewController controller) {
@@ -34,43 +50,91 @@ class ScannerController extends ServingController<ScannerServices> {
       gotResult.value = true;
       streamSubscription?.pause();
       controller.pauseCamera();
+      showDialog(result?.code ?? '');
     });
   }
 
   String displayResult() =>
       'Barcode Type: ${describeEnum(result!.format)} \n\nContent: ${result?.code ?? ''}';
 
-  void addScannedQrCodeToDB() async {
+  void _addScannedQrCodeToDB() async {
+    final DateTime scannedAt = DateTime.now();
     int value = await service.addScannedQrCode(
         scannedQrCode: ScannedQrCodeModel(
       qrContent: result?.code ?? '',
-      scannedAt: _scannedAt.millisecondsSinceEpoch,
+      scannedAt: scannedAt.millisecondsSinceEpoch,
     ));
-
-    showSnackBar();
-    cancelAndResume();
+    _showSnackBar();
+    _cancelAndResume();
 
     debugPrint(value.toString());
   }
 
-  void cancelAndResume() {
+  void _cancelAndResume() {
     streamSubscription?.resume();
 
     qrController?.resumeCamera();
     result = null;
     gotResult.value = false;
-
+    Get.back(closeOverlays: true);
     debugPrint(gotResult.value.toString());
     debugPrint(result.toString());
   }
 
-  void showSnackBar() {
+  void _showSnackBar() {
     Get.showSnackbar(const GetSnackBar(
       title: 'Congrats',
       message: "Qr code content saved succefully",
       backgroundColor: Colors.green,
       duration: Duration(milliseconds: 1000),
     ));
+  }
+
+  showDialog(String result) {
+    if (result.contains('http') || result.contains('https')) {
+      return Get.defaultDialog(
+        onWillPop: () async {
+          Get.back(closeOverlays: true);
+          return false;
+        },
+        title: 'Content',
+        content: Text(result),
+        onCancel: () => _cancelAndResume(),
+        onConfirm: () => _launchURL(result),
+        buttonColor: AppColors.primaryColor,
+        confirmTextColor: Colors.white,
+        cancelTextColor: AppColors.primaryColor,
+        contentPadding: const EdgeInsets.all(11),
+        textConfirm: "Open",
+      );
+    } else {
+      return Get.defaultDialog(
+        onWillPop: () async {
+          Get.back(closeOverlays: true);
+          return false;
+        },
+        title: 'Content',
+        content: Text(result),
+        onCancel: () => _cancelAndResume(),
+        onConfirm: () => _addScannedQrCodeToDB(),
+        buttonColor: AppColors.primaryColor,
+        confirmTextColor: Colors.white,
+        cancelTextColor: AppColors.primaryColor,
+        contentPadding: const EdgeInsets.all(11),
+        textConfirm: "Save",
+      );
+    }
+  }
+
+  //@ launch Url Function
+  _launchURL(String urlQRCode) async {
+    Uri url = Uri.parse(urlQRCode);
+    if (await canLaunchUrl(url)) {
+      _addScannedQrCodeToDB();
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   @override

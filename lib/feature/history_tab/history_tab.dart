@@ -15,89 +15,67 @@ class HistoryTab extends StatelessWidget {
     HistoryController controller = Get.put(HistoryController());
 
     return SmartScaffold(
-        body: Stack(
-      alignment: Alignment.center,
-      children: [
-        Container(
-          margin: const EdgeInsets.only(top: 30),
-          decoration: BoxDecoration(
-              color: Colors.grey.shade200,
-              borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(AppValues.defaultRadius),
-                  topRight: Radius.circular(AppValues.defaultRadius))),
-          child: RefreshIndicator(
-            color: Colors.white,
-            backgroundColor: AppColors.primaryColor,
-            onRefresh: () async => controller.getScannedQrCodes(),
-            child: CustomScrollView(
-              slivers: [
-                SliverList(
-                  delegate: SliverChildListDelegate(
-                    [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 11.0, vertical: 40),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Scanning history",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline4!
-                                  .copyWith(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
-                            ),
-                            const VerticalSpacing(10),
-                            Text(
-                              "The app will keep all your scanned codes history \nstored locally in your phone",
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(color: AppColors.secondaryColor),
-                            ),
-                            Obx(() => controller.scannedQrCodesList.isNotEmpty
-                                ? GridView.builder(
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                            childAspectRatio: 3.5,
-                                            crossAxisCount: 1),
-                                    itemCount:
-                                        controller.scannedQrCodesList.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return _ScannedQrCodeCard(
-                                          scannedQrCode: controller
-                                              .scannedQrCodesList[index]);
-                                    },
-                                  )
-                                : Center(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(18.0),
-                                      child: Text(
-                                        "No qr code scanned!",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleLarge,
-                                      ),
-                                    ),
-                                  ))
-                          ],
-                        ),
+        body: RefreshIndicator(
+      color: Colors.white,
+      backgroundColor: AppColors.primaryColor,
+      onRefresh: () async => controller.getScannedQrCodes(),
+      child: CustomScrollView(
+        slivers: [
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 11.0, vertical: 100),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Scanning History",
+                        style: Theme.of(context).textTheme.headline4!.copyWith(
+                            color: Colors.black, fontWeight: FontWeight.bold),
                       ),
+                      const VerticalSpacing(15),
+                      Text(
+                        "The app will keep all your scanned codes history \nstored locally in your phone",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium!
+                            .copyWith(color: AppColors.secondaryColor),
+                      ),
+                      const VerticalSpacing(20),
+                      Obx(() => controller.scannedQrCodesList.isNotEmpty
+                          ? GridView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      childAspectRatio: 3.5, crossAxisCount: 1),
+                              itemCount: controller.scannedQrCodesList.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return _ScannedQrCodeCard(
+                                    scannedQrCode:
+                                        controller.scannedQrCodesList[index]);
+                              },
+                            )
+                          : Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(18.0),
+                                child: Text(
+                                  "No qr code scanned!",
+                                  style: Theme.of(context).textTheme.titleLarge,
+                                ),
+                              ),
+                            ))
                     ],
                   ),
                 ),
               ],
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     ));
   }
 }

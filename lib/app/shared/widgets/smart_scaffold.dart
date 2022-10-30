@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -38,14 +37,22 @@ class SmartScaffold extends StatelessWidget {
                 child: Scaffold(
                   key: key,
                   appBar: appBar,
-                  body: Platform.isIOS ? SafeArea(child: body) : body,
-                  floatingActionButton: floatingActionButton,
-                  floatingActionButtonLocation: floatingActionButtonLocation ??
-                      (Platform.isIOS
-                          ? FloatingActionButtonLocation.centerDocked
-                          : FloatingActionButtonLocation.centerFloat),
+                  body: SafeArea(
+                    child: Stack(alignment: Alignment.center, children: [
+                      Container(
+                        margin: const EdgeInsets.only(top: 30),
+                        decoration: BoxDecoration(
+                            color: Colors.grey.shade200,
+                            borderRadius: const BorderRadius.only(
+                                topLeft:
+                                    Radius.circular(AppValues.defaultRadius),
+                                topRight:
+                                    Radius.circular(AppValues.defaultRadius))),
+                      ),
+                      SizedBox.expand(child: body),
+                    ]),
+                  ),
                   bottomNavigationBar: bottomNavigationBar,
-                  bottomSheet: bottomSheet,
                   backgroundColor: backgroundColor,
                   resizeToAvoidBottomInset: resizeToAvoidBottomInset,
                 ),
