@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:qr_scanner_challenge/app/design/index.dart';
 import 'package:qr_scanner_challenge/app/shared/controllers/serving_controller.dart';
@@ -26,6 +25,7 @@ class ScannerController extends ServingController<ScannerServices> {
 
   @override
   void onInit() {
+    reassemble();
     super.onInit();
   }
 
@@ -53,9 +53,6 @@ class ScannerController extends ServingController<ScannerServices> {
       _showDialog(result?.code ?? '');
     });
   }
-
-  String displayResult() =>
-      'Barcode Type: ${describeEnum(result!.format)} \n\nContent: ${result?.code ?? ''}';
 
   void _addScannedQrCodeToDB() async {
     final DateTime scannedAt = DateTime.now();

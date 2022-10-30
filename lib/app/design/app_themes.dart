@@ -42,14 +42,14 @@ class AppThemes {
     ),
 
     // //? List Tile
-    // listTileTheme: const ListTileThemeData(
-    //   textColor: Colors.black,
-    //   contentPadding: EdgeInsets.all(5),
-    //   shape: RoundedRectangleBorder(
-    //     borderRadius:
-    //         BorderRadius.all(Radius.circular(AppValues.listTileRadius)),
-    //   ),
-    //   tileColor: AppColors.listTileColor,
-    // ),
+    listTileTheme: const ListTileThemeData(
+      textColor: Colors.black,
+      contentPadding: EdgeInsets.all(5),
+      shape: RoundedRectangleBorder(
+        borderRadius:
+            BorderRadius.all(Radius.circular(AppValues.listTileRadius)),
+      ),
+      tileColor: AppColors.listTileColor,
+    ),
   );
 }

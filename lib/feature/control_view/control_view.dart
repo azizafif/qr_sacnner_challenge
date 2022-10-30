@@ -25,10 +25,10 @@ class ControlView extends StatelessWidget {
             selectedIndex:
                 context.find<ControlViewController>().selectedIndex.value,
             showElevation: true,
-            onItemSelected: (index) => context
-                .find<ControlViewController>()
-                .selectedIndex
-                .value = index,
+            onItemSelected: (index) {
+              context.find<ControlViewController>().selectedIndex.value = index;
+              context.find<ControlViewController>().reassemble();
+            },
             containerHeight: 60,
             items: [
               BottomNavyBarItem(

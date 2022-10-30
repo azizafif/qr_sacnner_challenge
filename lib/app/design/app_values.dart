@@ -2,10 +2,14 @@ class AppValues {
   AppValues._();
 
   //? Scaffold
-  static const double bodyTopPadding = 50;
-  static const double bodyBottomPadding = 50;
+  static const double bodyTopPadding = 30;
+
   static const double bodyMinSymetricHorizontalPadding = 25;
   static const double bodyMaxSymetricHorizontalPadding = 32;
+
+  //? Scanner
+  static const double frameHeight = 350;
+  static const double frameWidth = 350;
 
   //? Elevated button
   static const double elevatedButtonElevation = defaultElevation;
@@ -24,5 +28,5 @@ class AppValues {
   static const double defaultRadius = 30;
 
   //$ Elevation
-  static const double defaultElevation = 1;
+  static const double defaultElevation = 5;
 }

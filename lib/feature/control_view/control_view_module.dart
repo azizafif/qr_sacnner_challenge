@@ -6,6 +6,6 @@ import '../../app/shared/modules/exports.dart';
 final controlModule = GetPage(
   name: '/ControlViewModule',
   page: () =>
-      InheritanceProviderOf<ControlViewController>(across: ControlView()),
+      const InheritanceProviderOf<ControlViewController>(across: ControlView()),
   binding: BindingsBuilder.put(() => ControlViewController()),
 );

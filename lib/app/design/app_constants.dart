@@ -15,4 +15,10 @@ class AppConstants {
   static const String historyTabDescription =
       "The app will keep all your scanned codes history \nstored locally in your phone";
   static const String historyTabNoData = "No qr code scanned!";
+
+  //? CONNECTIVITY
+  static const String connectivityNoInternet =
+      'You are not connected\nto the Internet';
+  static const String connectivityMessage =
+      'This app requires an internet connection to function.\nPlease reconnect to continue using our services.';
 }

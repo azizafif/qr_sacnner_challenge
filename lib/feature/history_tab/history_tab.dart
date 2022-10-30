@@ -13,6 +13,7 @@ class HistoryTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.find<HistoryController>().getScannedQrCodes();
     return RefreshIndicator(
       color: Colors.white,
       backgroundColor: AppColors.primaryColor,
@@ -23,59 +24,56 @@ class HistoryTab extends StatelessWidget {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 11.0, vertical: 90),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        AppConstants.historyTabTitle,
-                        style: Theme.of(context).textTheme.headline4!.copyWith(
-                            color: Colors.black, fontWeight: FontWeight.bold),
-                      ),
-                      const VerticalSpacing(15),
-                      Text(
-                        AppConstants.historyTabDescription,
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium!
-                            .copyWith(color: AppColors.secondaryColor),
-                      ),
-                      const VerticalSpacing(20),
-                      Obx(() => context
-                              .find<HistoryController>()
-                              .scannedQrCodesList
-                              .isNotEmpty
-                          ? GridView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                      childAspectRatio: 3.5, crossAxisCount: 1),
-                              itemCount: context
-                                  .find<HistoryController>()
-                                  .scannedQrCodesList
-                                  .length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return _ScannedQrCodeCard(
-                                    scannedQrCode: context
-                                        .find<HistoryController>()
-                                        .scannedQrCodesList[index]);
-                              },
-                            )
-                          : Center(
-                              child: Padding(
-                                padding: const EdgeInsets.all(18.0),
-                                child: Text(
-                                  AppConstants.historyTabNoData,
-                                  style: Theme.of(context).textTheme.titleLarge,
-                                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const VerticalSpacing(30),
+                    Text(
+                      AppConstants.historyTabTitle,
+                      style: Theme.of(context).textTheme.headline4!.copyWith(
+                          color: Colors.black, fontWeight: FontWeight.bold),
+                    ),
+                    const VerticalSpacing(15),
+                    Text(
+                      AppConstants.historyTabDescription,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(color: AppColors.secondaryColor),
+                    ),
+                    const VerticalSpacing(20),
+                    Obx(() => context
+                            .find<HistoryController>()
+                            .scannedQrCodesList
+                            .isNotEmpty
+                        ? GridView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    childAspectRatio: 3.5, crossAxisCount: 1),
+                            itemCount: context
+                                .find<HistoryController>()
+                                .scannedQrCodesList
+                                .length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return _ScannedQrCodeCard(
+                                  scannedQrCode: context
+                                      .find<HistoryController>()
+                                      .scannedQrCodesList[index]);
+                            },
+                          )
+                        : Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(18.0),
+                              child: Text(
+                                AppConstants.historyTabNoData,
+                                style: Theme.of(context).textTheme.titleLarge,
                               ),
-                            ))
-                    ],
-                  ),
+                            ),
+                          ))
+                  ],
                 ),
               ],
             ),
@@ -112,7 +110,7 @@ class _ScannedQrCodeCard extends StatelessWidget {
             ),
           ),
           title: Text(
-            scannedQrCode.qrContent ?? '',
+            scannedQrCode.qrContent.toString(),
             style: Theme.of(context).textTheme.titleSmall,
           ),
           subtitle: Text(

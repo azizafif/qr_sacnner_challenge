@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:qr_scanner_challenge/app/design/app_constants.dart';
 import 'package:qr_scanner_challenge/app/shared/handlers/connectivity_handler.dart';
 
 import '../../design/index.dart';
@@ -29,19 +30,19 @@ class SmartScaffold extends StatelessWidget {
                 child: Scaffold(
                   key: key,
                   body: SafeArea(
-                    child: Stack(alignment: Alignment.center, children: [
-                      Container(
-                        margin: const EdgeInsets.only(top: 30),
-                        decoration: BoxDecoration(
-                            color: Colors.grey.shade200,
-                            borderRadius: const BorderRadius.only(
-                                topLeft:
-                                    Radius.circular(AppValues.defaultRadius),
-                                topRight:
-                                    Radius.circular(AppValues.defaultRadius))),
-                        child: SizedBox.expand(child: body),
-                      ),
-                    ]),
+                    child: Container(
+                      alignment: Alignment.center,
+                      margin:
+                          const EdgeInsets.only(top: AppValues.bodyTopPadding),
+                      padding: const EdgeInsets.only(top: 10),
+                      decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(AppValues.defaultRadius),
+                              topRight:
+                                  Radius.circular(AppValues.defaultRadius))),
+                      child: SizedBox.expand(child: body),
+                    ),
                   ),
                   bottomNavigationBar: bottomNavigationBar,
                   backgroundColor: backgroundColor,
@@ -65,11 +66,10 @@ class _DisconnectedWidget extends StatelessWidget {
             elevation: 40,
             margin: const EdgeInsets.symmetric(horizontal: 40),
             child: Column(
-              // mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                FittedBox(
-                    child: Image.asset('assets/images/logo.png',
-                        height: 250, width: 200)),
+                const FittedBox(
+                    child:
+                        Image(image: AppImages.logo, height: 250, width: 200)),
                 BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: .5, sigmaY: .5),
                   child: Padding(
@@ -80,7 +80,7 @@ class _DisconnectedWidget extends StatelessWidget {
                       children: [
                         Flexible(
                           child: Text(
-                            'You are not connected\nto the Internet',
+                            AppConstants.connectivityNoInternet,
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
@@ -98,7 +98,7 @@ class _DisconnectedWidget extends StatelessWidget {
                         const VerticalSpacing(30),
                         Flexible(
                           child: Text(
-                            'This app requires an internet connection to function.\nPlease reconnect to continue using our services.',
+                            AppConstants.connectivityMessage,
                             style: Theme.of(context)
                                 .textTheme
                                 .labelMedium
