@@ -14,23 +14,6 @@ class AppThemes {
     scaffoldBackgroundColor: AppColors.scaffoldColor,
     primaryColor: AppColors.primaryColor,
 
-    //? Elevated Button
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(AppColors.primaryColor),
-        foregroundColor: MaterialStateProperty.all(Colors.white),
-
-        elevation: MaterialStateProperty.all(AppValues.elevatedButtonElevation),
-        padding: MaterialStateProperty.all(EdgeInsets.zero),
-        shape: MaterialStateProperty.all(const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-                Radius.circular(AppValues.elevatedButtonRadius)))),
-        // textStyle: MaterialStateProperty.all(AppStyles.textButtonTitleTextStyle),
-        minimumSize: MaterialStateProperty.all(
-            const Size.fromHeight(AppValues.elevatedButtonHeight)),
-      ),
-    ),
-
     //& Card
     cardTheme: const CardTheme(
       color: AppColors.listTileColor,

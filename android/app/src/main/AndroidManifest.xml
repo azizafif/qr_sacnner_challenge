@@ -1,9 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.qr_scanner_challenge">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="qr_scanner_challenge"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+         
  
         <activity
             android:name=".MainActivity"
@@ -24,6 +26,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
+                
             </intent-filter>
   
         </activity>

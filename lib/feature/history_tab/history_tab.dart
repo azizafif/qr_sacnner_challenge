@@ -109,7 +109,7 @@ class _ScannedQrCodeCard extends StatelessWidget {
               color: AppColors.primaryColor,
             ),
           ),
-          title: Text(
+          title: SelectableText(
             scannedQrCode.qrContent.toString(),
             style: Theme.of(context).textTheme.titleSmall,
           ),
