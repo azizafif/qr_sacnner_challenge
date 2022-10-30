@@ -6,6 +6,7 @@ import 'package:qr_scanner_challenge/app/shared/utils/extensions/inherted_contro
 import 'package:qr_scanner_challenge/feature/control_view/control_view_controller.dart';
 import 'package:qr_scanner_challenge/feature/history_tab/history_controller.dart';
 import 'package:qr_scanner_challenge/feature/history_tab/history_tab.dart';
+import 'package:qr_scanner_challenge/feature/scanner_tab/scanner_controller.dart';
 import 'package:qr_scanner_challenge/feature/scanner_tab/scanner_tab.dart';
 
 import '../../app/shared/widgets/index.dart';
@@ -29,6 +30,9 @@ class ControlView extends StatelessWidget {
             onItemSelected: (index) {
               context.find<ControlViewController>().selectedIndex.value = index;
               context.find<HistoryController>().getScannedQrCodes();
+              if (index == 1) {
+                context.find<ScannerController>().onClose();
+              }
             },
             containerHeight: 60,
             items: [

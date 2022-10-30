@@ -50,6 +50,7 @@ class ScannerController extends ServingController<ScannerServices> {
       gotResult.value = true;
       streamSubscription?.pause();
       controller.pauseCamera();
+
       _showDialog(result?.code ?? '');
     });
   }
@@ -61,7 +62,7 @@ class ScannerController extends ServingController<ScannerServices> {
       qrContent: result?.code ?? '',
       scannedAt: scannedAt.millisecondsSinceEpoch,
     ));
-    _showSnackBar();
+
     _cancelAndResume();
   }
 
@@ -72,15 +73,6 @@ class ScannerController extends ServingController<ScannerServices> {
     result = null;
     gotResult.value = false;
     Get.back(closeOverlays: true);
-  }
-
-  void _showSnackBar() {
-    Get.showSnackbar(const GetSnackBar(
-      title: 'Congrats',
-      message: "Qr code content saved succefully",
-      backgroundColor: Colors.green,
-      duration: Duration(milliseconds: 1000),
-    ));
   }
 
   _showDialog(String result) {
@@ -133,7 +125,7 @@ class ScannerController extends ServingController<ScannerServices> {
   @override
   void onClose() {
     qrController?.dispose();
-
+    streamSubscription?.cancel();
     super.onClose();
   }
 }
