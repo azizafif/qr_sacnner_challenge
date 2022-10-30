@@ -11,8 +11,9 @@ void main() async {
   runApp(MyApp());
 }
 
-void _setupStatusBarTransparency() =>
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Colors.transparent,
-        statusBarBrightness: Brightness.dark));
+void _setupStatusBarTransparency() => SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          systemNavigationBarColor: Colors.transparent,
+          statusBarBrightness: Brightness.dark),
+    );
