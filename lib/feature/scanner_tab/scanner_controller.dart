@@ -50,7 +50,7 @@ class ScannerController extends ServingController<ScannerServices> {
       gotResult.value = true;
       streamSubscription?.pause();
       controller.pauseCamera();
-      showDialog(result?.code ?? '');
+      _showDialog(result?.code ?? '');
     });
   }
 
@@ -59,15 +59,13 @@ class ScannerController extends ServingController<ScannerServices> {
 
   void _addScannedQrCodeToDB() async {
     final DateTime scannedAt = DateTime.now();
-    int value = await service.addScannedQrCode(
+    await service.addScannedQrCode(
         scannedQrCode: ScannedQrCodeModel(
       qrContent: result?.code ?? '',
       scannedAt: scannedAt.millisecondsSinceEpoch,
     ));
     _showSnackBar();
     _cancelAndResume();
-
-    debugPrint(value.toString());
   }
 
   void _cancelAndResume() {
@@ -77,8 +75,6 @@ class ScannerController extends ServingController<ScannerServices> {
     result = null;
     gotResult.value = false;
     Get.back(closeOverlays: true);
-    debugPrint(gotResult.value.toString());
-    debugPrint(result.toString());
   }
 
   void _showSnackBar() {
@@ -90,7 +86,7 @@ class ScannerController extends ServingController<ScannerServices> {
     ));
   }
 
-  showDialog(String result) {
+  _showDialog(String result) {
     if (result.contains('http') || result.contains('https')) {
       return Get.defaultDialog(
         onWillPop: () async {
@@ -140,7 +136,7 @@ class ScannerController extends ServingController<ScannerServices> {
   @override
   void onClose() {
     qrController?.dispose();
-    debugPrint("qrController disposed");
+
     super.onClose();
   }
 }

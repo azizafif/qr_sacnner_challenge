@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:qr_scanner_challenge/app/shared/controllers/serving_controller.dart';
 import 'package:qr_scanner_challenge/data/scanned_qr_model.dart';
 import 'package:qr_scanner_challenge/feature/history_tab/history_services.dart';
@@ -30,5 +31,11 @@ class HistoryController extends ServingController<HistoryServices> {
         .toList());
 
     scannedQrCodesList.refresh();
+  }
+
+  String parseTimeStamp(int value) {
+    var date = DateTime.fromMillisecondsSinceEpoch(value);
+    var d12 = DateFormat('MM-dd-yyyy, hh:mm a').format(date);
+    return d12;
   }
 }

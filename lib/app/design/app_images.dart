@@ -14,6 +14,7 @@ class AppImages {
 
   static Future precacheAssets(BuildContext context) async {
     await precacheImage(logo, context);
+
     await precacheImage(scannerIcon, context);
     await precacheImage(historyIcon, context);
     await precacheImage(linkIcon, context);

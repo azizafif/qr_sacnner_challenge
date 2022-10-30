@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:qr_scanner_challenge/feature/control_view_module.dart';
-import 'package:qr_scanner_challenge/feature/scanner_tab/module.dart';
+import 'package:qr_scanner_challenge/feature/control_view/control_view_module.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 
 import 'design/index.dart';
@@ -47,17 +46,6 @@ class _MyAppState extends State<MyApp> {
         //$ Theme management
         theme: AppThemes.lightTheme,
 
-        //& Locales management
-        // supportedLocales: S.delegate.supportedLocales,
-        // locale: S.delegate.supportedLocales.first,
-        // fallbackLocale: S.delegate.supportedLocales.last,
-        // localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
-        //   S.delegate,
-        //   GlobalMaterialLocalizations.delegate,
-        //   GlobalWidgetsLocalizations.delegate,
-        //   GlobalCupertinoLocalizations.delegate,
-        // ],
-
         //@ Binginds
         initialBinding: Binding(),
 
@@ -65,7 +53,6 @@ class _MyAppState extends State<MyApp> {
         initialRoute: controlModule.name,
         getPages: [
           controlModule,
-          scannerTab,
         ],
         defaultTransition: Transition.cupertino,
       );

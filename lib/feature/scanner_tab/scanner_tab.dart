@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:qr_scanner_challenge/app/design/app_constants.dart';
 import 'package:qr_scanner_challenge/app/design/index.dart';
+import 'package:qr_scanner_challenge/app/shared/utils/extensions/inherted_controller_finder.dart';
 import 'package:qr_scanner_challenge/app/shared/widgets/index.dart';
 import 'package:qr_scanner_challenge/feature/scanner_tab/scanner_controller.dart';
 
@@ -10,8 +11,6 @@ class ScannerTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScannerController controller = Get.put(ScannerController());
-
     return SmartScaffold(
         body: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 11.0),
@@ -19,7 +18,7 @@ class ScannerTab extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Scan QR code",
+            AppConstants.scannerTabTitle,
             style: Theme.of(context)
                 .textTheme
                 .headline4!
@@ -27,7 +26,7 @@ class ScannerTab extends StatelessWidget {
           ),
           const VerticalSpacing(10),
           Text(
-            "Place the qr code inside the frame to scan. \nPlease avoid shaking to get results quikly",
+            AppConstants.scannerTabDescription,
             textAlign: TextAlign.center,
             style: Theme.of(context)
                 .textTheme
@@ -42,8 +41,9 @@ class ScannerTab extends StatelessWidget {
                 height: 350,
                 width: 350,
                 child: QRView(
-                  key: controller.qrKey,
-                  onQRViewCreated: controller.onQRViewCreated,
+                  key: context.find<ScannerController>().qrKey,
+                  onQRViewCreated:
+                      context.find<ScannerController>().onQRViewCreated,
                   overlay: QrScannerOverlayShape(
                     cutOutSize: 300,
                     borderLength: 2,

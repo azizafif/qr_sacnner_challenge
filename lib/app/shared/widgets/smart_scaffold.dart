@@ -9,23 +9,15 @@ import 'index.dart';
 class SmartScaffold extends StatelessWidget {
   const SmartScaffold({
     super.key,
-    this.appBar,
     required this.body,
-    this.floatingActionButton,
-    this.floatingActionButtonLocation,
     this.bottomNavigationBar,
-    this.bottomSheet,
     this.backgroundColor,
     this.resizeToAvoidBottomInset,
   });
 
-  final PreferredSizeWidget? appBar;
   final Widget body;
-  final Widget? floatingActionButton;
-  final FloatingActionButtonLocation? floatingActionButtonLocation;
   final Color? backgroundColor;
   final Widget? bottomNavigationBar;
-  final Widget? bottomSheet;
   final bool? resizeToAvoidBottomInset;
 
   @override
@@ -36,7 +28,6 @@ class SmartScaffold extends StatelessWidget {
                 onTap: FocusScope.of(context).unfocus,
                 child: Scaffold(
                   key: key,
-                  appBar: appBar,
                   body: SafeArea(
                     child: Stack(alignment: Alignment.center, children: [
                       Container(
@@ -48,8 +39,8 @@ class SmartScaffold extends StatelessWidget {
                                     Radius.circular(AppValues.defaultRadius),
                                 topRight:
                                     Radius.circular(AppValues.defaultRadius))),
+                        child: SizedBox.expand(child: body),
                       ),
-                      SizedBox.expand(child: body),
                     ]),
                   ),
                   bottomNavigationBar: bottomNavigationBar,

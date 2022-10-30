@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'dart:developer';
+
 import 'package:path/path.dart';
 import 'package:qr_scanner_challenge/data/scanned_qr_model.dart';
 import 'package:sqflite/sqflite.dart';
@@ -25,20 +26,16 @@ class DBHelper {
           
           ''');
       });
-      debugPrint('creating a new database');
     } catch (e) {
-      debugPrint(e.toString());
+      log(e.toString());
     }
   }
 
   static Future<int> insert(ScannedQrCodeModel? scannedQrCodeModel) async {
-    debugPrint('insert function called');
     return await _db!.insert(_tableName, scannedQrCodeModel!.toJson());
   }
 
   static Future<List<Map<String, dynamic>>> query() async {
-    debugPrint('query function called');
-
     return await _db!.query(_tableName);
   }
 }
