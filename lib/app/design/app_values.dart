@@ -14,7 +14,6 @@ class AppValues {
   //? Elevated button
   static const double elevatedButtonElevation = defaultElevation;
   static const double elevatedButtonRadius = defaultRadius;
-  static const double elevatedButtonHeight = 52;
 
   //? Cards
   static const double cardElevation = defaultElevation;

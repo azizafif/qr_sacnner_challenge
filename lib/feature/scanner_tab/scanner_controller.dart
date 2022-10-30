@@ -48,7 +48,7 @@ class ScannerController extends ServingController<ScannerServices> {
     streamSubscription = controller.scannedDataStream.listen((scanData) {
       result = scanData;
       gotResult.value = true;
-      streamSubscription?.pause();
+
       controller.pauseCamera();
 
       _showDialog(result?.code ?? '');

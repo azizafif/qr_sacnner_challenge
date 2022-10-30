@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:qr_scanner_challenge/app/shared/controllers/base_controller.dart';
@@ -12,7 +11,6 @@ class ControlViewController extends BaseController {
   void onInit() {
     reassemble();
 
-    debugPrint("reassemble called");
     super.onInit();
   }
 
